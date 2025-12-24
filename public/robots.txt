@@ -1,5 +1,5 @@
-# Robots.txt for Slow Morocco
-# https://slowmorocco.com
+# Robots.txt for Slow Tunisia
+# https://slowtunisia.com
 
 User-agent: *
 Allow: /
@@ -11,4 +11,4 @@ Disallow: /client/
 Disallow: /proposal/
 
 # Sitemap location
-Sitemap: https://slowmorocco.com/sitemap.xml
+Sitemap: https://slowtunisia.com/sitemap.xml
