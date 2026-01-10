@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSheetData } from "@/lib/sheets";
+import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 export const revalidate = 60;
 
@@ -37,7 +37,7 @@ export async function GET(
       name: place.name,
       region: region?.name || place.region_id || "",
       regionId: place.region_id,
-      heroImage: place.hero_image || "",
+      heroImage: convertDriveUrl(place.hero_image || ""),
       excerpt: place.excerpt || "",
       body: place.body || "",
       highlights: place.highlights ? place.highlights.split("|").map((h: string) => h.trim()) : [],

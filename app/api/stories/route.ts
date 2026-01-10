@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getSheetData } from "@/lib/sheets";
+import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 export const revalidate = 60;
 
@@ -20,10 +20,10 @@ export async function GET() {
         title: story.title,
         subtitle: story.subtitle || "",
         category: story.category || "Essay",
-        heroImage: story.hero_image || "",
+        heroImage: convertDriveUrl(story.hero_image || ""),
         excerpt: story.excerpt || "",
         readTime: story.read_time || "5 min",
-        featured: story.featured === "TRUE" || story.featured === "true",
+        featured: story.featured || "",
       }));
 
     return NextResponse.json(publishedStories);
