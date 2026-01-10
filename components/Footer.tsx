@@ -69,12 +69,12 @@ interface SiteConfig {
   parentBrand?: string; // For "Powered by" - only moons and microsites
 }
 
-// Slow Morocco is a Planet (commercial)
+// Slow Tunisia is a Planet (commercial)
 const siteConfig: SiteConfig = {
-  siteId: "slow-morocco",
+  siteId: "slow-tunisia",
   siteType: "planet",
   siteCategory: "commercial",
-  brandName: "Slow Morocco",
+  brandName: "Slow Tunisia",
   // No parentBrand - planets are the parent
 };
 
@@ -113,7 +113,7 @@ interface FooterData {
 const defaultFooterData: FooterData = {
   newsletter: {
     backgroundImage: "",
-    title: "Notes from Morocco",
+    title: "Notes from Tunisia",
     description: "Quiet. Irregular. Real.",
   },
   columns: [
@@ -131,6 +131,14 @@ const defaultFooterData: FooterData = {
     },
     {
       number: 2,
+      title: "Discover",
+      links: [
+        { order: 1, label: "Stories", href: "/stories", type: "link" },
+        { order: 2, label: "Places", href: "/places", type: "link" },
+      ],
+    },
+    {
+      number: 3,
       title: "About Us",
       links: [
         { order: 1, label: "What We Offer", href: "/about", type: "link" },
@@ -314,7 +322,7 @@ export default function Footer() {
                         S L O W
                       </span>
                       <span className="font-serif text-sm tracking-[0.2em] text-white/90 block">
-                        M O R O C C O
+                        T U N I S I A
                       </span>
                     </div>
                   ) : (
