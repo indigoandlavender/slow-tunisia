@@ -1,4 +1,5 @@
 import StoryCard from "@/components/StoryCard";
+import TunisiaMapWrapper from "@/components/TunisiaMapWrapper";
 import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 async function getStories() {
@@ -42,6 +43,18 @@ export default async function StoriesPage() {
           </div>
         </div>
       </section>
+
+      {/* Map Section */}
+      {stories.length > 0 && (
+        <section className="px-6 pb-16">
+          <div className="max-w-7xl mx-auto">
+            <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-6">
+              Explore by Location
+            </p>
+            <TunisiaMapWrapper stories={stories} />
+          </div>
+        </section>
+      )}
 
       {/* Featured Stories */}
       {featuredStories.length > 0 && (

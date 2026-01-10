@@ -1,4 +1,5 @@
 import PlaceCard from "@/components/PlaceCard";
+import TunisiaMapWrapper from "@/components/TunisiaMapWrapper";
 import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 async function getPlaces() {
@@ -38,6 +39,24 @@ export default async function PlacesPage() {
           </div>
         </div>
       </section>
+
+      {/* Map Section */}
+      {places.length > 0 && (
+        <section className="px-6 pb-16">
+          <div className="max-w-7xl mx-auto">
+            <p className="text-xs tracking-[0.2em] uppercase text-white/50 mb-6">
+              Explore by Location
+            </p>
+            <TunisiaMapWrapper
+              stories={places.map((p: any) => ({
+                slug: p.slug,
+                title: p.name,
+                region: p.region
+              }))}
+            />
+          </div>
+        </section>
+      )}
 
       {/* Places Grid */}
       <section className="px-6 pb-32">
