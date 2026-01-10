@@ -1,12 +1,20 @@
 import PlaceCard from "@/components/PlaceCard";
+import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 async function getPlaces() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api/places`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const places = await getSheetData("Places");
+    return places
+      .filter((place: any) => place.published === "TRUE")
+      .map((place: any) => ({
+        ...place,
+        heroImage: convertDriveUrl(place.heroImage),
+      }))
+      .sort((a: any, b: any) => (parseInt(a.order) || 0) - (parseInt(b.order) || 0));
+  } catch (error) {
+    console.error("Error fetching places:", error);
+    return [];
+  }
 }
 
 export default async function PlacesPage() {

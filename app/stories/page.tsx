@@ -1,12 +1,21 @@
 import StoryCard from "@/components/StoryCard";
+import { getSheetData, convertDriveUrl } from "@/lib/sheets";
 
 async function getStories() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
-  const res = await fetch(`${baseUrl}/api/stories`, {
-    next: { revalidate: 60 },
-  });
-  if (!res.ok) return [];
-  return res.json();
+  try {
+    const stories = await getSheetData("Stories");
+    return stories
+      .filter((story: any) => story.published === "TRUE")
+      .map((story: any) => ({
+        ...story,
+        heroImage: convertDriveUrl(story.heroImage),
+        featured: story.featured === "TRUE",
+      }))
+      .sort((a: any, b: any) => (parseInt(a.order) || 0) - (parseInt(b.order) || 0));
+  } catch (error) {
+    console.error("Error fetching stories:", error);
+    return [];
+  }
 }
 
 export default async function StoriesPage() {
